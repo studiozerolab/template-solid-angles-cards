@@ -1,0 +1,117 @@
+---
+import { mainNav } from "../../config/menus";
+import site from "../../config/site";
+---
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+    <a href="#home" class="font-semibold tracking-tight">{site.name}</a>
+    <button
+      id="desktopMenuBtn"
+      class="rounded px-3 py-1 outline-none focus-visible:ring ring-offset-2 ring-black/20"
+      aria-haspopup="dialog"
+      aria-controls="desktopMenuDialog"
+      aria-expanded="false"
+    >
+      Menu
+    </button>
+  </div>
+</header>
+
+<!-- Modal dialog (backdrop + content wrapper) -->
+<div
+  id="desktopMenuDialog"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="desktopMenuTitle"
+  class="fixed inset-0 z-50 hidden"
+>
+  <div class="absolute inset-0 bg-black/40"></div>
+  <div
+    id="desktopMenuContent"
+    class="relative mx-auto mt-20 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+  >
+    <div class="mb-4 flex items-center justify-between">
+      <h2 id="desktopMenuTitle" class="text-lg font-semibold">Menu</h2>
+      <button
+        id="desktopMenuClose"
+        aria-label="Close menu"
+        class="rounded p-2 outline-none focus-visible:ring ring-offset-2 ring-black/20"
+      >
+        ✕
+      </button>
+    </div>
+    <ul class="space-y-2">
+      {mainNav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block rounded px-3 py-2 hover:bg-black/5 focus:outline-none focus-visible:ring ring-offset-2 ring-black/20"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('desktopMenuBtn');
+  const dlg = document.getElementById('desktopMenuDialog');
+  const content = document.getElementById('desktopMenuContent');
+  const closeBtn = document.getElementById('desktopMenuClose');
+  let lastFocused = null;
+
+  function open() {
+    lastFocused = document.activeElement;
+    dlg?.classList.remove('hidden');
+    document.documentElement.style.overflow = 'hidden';
+    btn?.setAttribute('aria-expanded', 'true');
+    const firstLink = dlg?.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+    if (firstLink) (firstLink as HTMLElement).focus();
+  }
+  function close() {
+    dlg?.classList.add('hidden');
+    document.documentElement.style.overflow = '';
+    btn?.setAttribute('aria-expanded', 'false');
+    (lastFocused as HTMLElement | null)?.focus?.();
+  }
+  function onKeydown(e) {
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab' && dlg && !dlg.classList.contains('hidden')) {
+      const focusables = Array.from(
+        dlg.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])')
+      ) as HTMLElement[];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
+  // Close when clicking the backdrop (anywhere outside content)
+  dlg?.addEventListener('click', (e) => {
+    if (!content) return;
+
+    const target = e.target as Node;
+
+    // If click is outside the content, close
+    if (!content.contains(target)) {
+      close();
+      return;
+    }
+
+    // If a link inside the dialog is clicked, close as well
+    const linkEl = (e.target as HTMLElement).closest('a[href]');
+    if (linkEl) close();
+  });
+
+  btn?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  document.addEventListener('keydown', onKeydown);
+</script>

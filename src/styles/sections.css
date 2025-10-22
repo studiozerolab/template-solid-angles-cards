@@ -1,0 +1,68 @@
+/* ===== Section backgrounds (tokens) ===== */
+.section-surface      { --section-bg: #ffffff; background: var(--section-bg); }
+.section-alt          { --section-bg: #F8FAFC; background: var(--section-bg); }
+.section-primary-tint { --section-bg: color-mix(in srgb, #2563EB 6%, #ffffff); background: var(--section-bg); }
+.section-accent-tint  { --section-bg: color-mix(in srgb, #F59E0B 6%, #ffffff); background: var(--section-bg); }
+
+/* Content shells (hero stays full width) */
+.content-narrow   { max-width: 60rem; margin-left: auto; margin-right: auto; }
+.content-narrower { max-width: 56rem; margin-left: auto; margin-right: auto; }
+
+/* Section wrapper (for layering) */
+.section { position: relative; isolation: isolate; overflow: hidden; }
+.angle-edge { width: 100%; }
+
+/* ===== Hero background & overlay ===== */
+.hero-image {
+  /* --hero-image: var(--hero-image, url("/assets/hero.jpg")); */
+  position: relative;
+  /* background-image: var(--hero-image); */
+  background-size: cover;
+  background-position: center;
+}
+/* .hero-image::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom right, rgba(0,0,0,.52), rgba(0,0,0,.32));
+  pointer-events: none;
+} */
+.hero-image > * { position: relative; z-index: 1; }
+
+/* ===== Spotlights (2/3 text + 1/3 image, centered rows, alternating) ===== */
+.spot-row {
+  margin-left: auto; margin-right: auto;
+  max-width: 56rem; display: grid; gap: 1.5rem; align-items: center;
+}
+@media (min-width: 768px) { .spot-row { grid-template-columns: 2fr 1fr; } }
+
+.spot-img { width: 12rem; height: 12rem; object-fit: cover; border: 1px solid var(--line,#E2E8F0); box-shadow: 0 1px 8px rgba(0,0,0,.06); }
+.img-circle { border-radius: 9999px; }
+.img-square { border-radius: .75rem; }
+.spot-copy { max-width: 42rem; }
+.spot-link { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .9rem; border: 1px solid var(--line,#E2E8F0); border-radius: .5rem; }
+.spot-link::after { content: "○"; opacity: .7; font-size: .9rem; line-height: 1; }
+
+/* ===== “Vitae phasellus” style cards ===== */
+.card-shell { max-width: 60rem; margin-left: auto; margin-right: auto; }
+.card-grid { display: grid; gap: 1.25rem; }
+@media (min-width: 640px) { .card-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width: 1024px) { .card-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+.card-vitae { border: 1px solid var(--line,#E2E8F0); border-radius: .75rem; background: #fff; overflow: hidden; box-shadow: 0 1px 8px rgba(0,0,0,.04); }
+.card-vitae img { display: block; width: 100%; height: 12rem; object-fit: cover; }
+.card-vitae .body { padding: 1rem 1rem 1.1rem; }
+.card-vitae h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 .35rem; }
+.card-vitae p { color: #475569; margin: 0 0 .75rem; }
+.card-vitae .cta { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .85rem; border: 1px solid var(--line,#E2E8F0); border-radius: .5rem; }
+.card-vitae .cta::before { content: "○"; opacity: .75; font-size: .9rem; }
+
+/* ===== Footer background (texture/image) ===== */
+.footer-image {
+  /* fallback if site.images.footer is empty */
+  --footer-image: var(--footer-image, url("/assets/footer.jpg"));
+  background-image: var(--footer-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}

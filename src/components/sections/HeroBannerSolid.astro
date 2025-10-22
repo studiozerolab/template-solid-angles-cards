@@ -1,0 +1,109 @@
+---
+import site from "../../config/site";
+import AngleEdge from "../ui/AngleEdge.astro";
+
+/** Props:
+ *  title, subtitle, ctaText/ctaHref, secondaryText/secondaryHref
+ *  anglesTop?: boolean (default false)
+ *  anglesBottom?: boolean (default true)
+ *  dirTop?: "left"|"right"  (default "left")
+ *  dirBottom?: "left"|"right" (default "left")
+ *  nextBg?: "surface"|"alt"|"primary-tint"|"accent-tint"
+ *
+ *  bgImage?: string | null
+ *  bg?: "surface"|"alt"|"primary-tint"|"accent-tint"
+ *  overlayPercent?: number   // 0–100 (default 45). Ignored when no image.
+ */
+const {
+  title,
+  subtitle,
+  ctaText,
+  ctaHref = "#",
+  secondaryText,
+  secondaryHref = "#",
+  anglesTop,
+  anglesBottom,
+  dirTop,
+  dirBottom,
+  nextBg,
+
+  bgImage = undefined,
+  bg,
+  overlayPercent = "",
+} = Astro.props;
+
+// Resolve image (explicit prop > site config). Empty string disables.
+const resolvedImage = bgImage !== undefined ? bgImage : site?.images?.hero;
+const hasImage = !!(resolvedImage && String(resolvedImage).trim().length);
+
+// Clamp & map overlay percentage (top a bit stronger than bottom for depth)
+const p = Math.max(0, Math.min(100, Number(overlayPercent) || 0)) / 100;
+const topA = p;                  // e.g., 0.45 when overlayPercent=45
+const bottomA = p * 0.66;        // a touch lighter at the end
+
+// Next-section fill
+const nextColor =
+  nextBg === "alt" ? "#F8FAFC"
+  : nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)"
+  : nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)"
+  : "#FFFFFF";
+
+// Solid background token class when no image
+const bgClass =
+  bg === "alt" ? "section-alt"
+  : bg === "primary-tint" ? "section-primary-tint"
+  : bg === "accent-tint" ? "section-accent-tint"
+  : "section-surface";
+
+// Inline background-image that includes the overlay when we have an image
+const bgStyle = hasImage
+  ? `background-image: linear-gradient(to bottom right, rgba(0,0,0,${topA}), rgba(0,0,0,${bottomA})), url('${resolvedImage}');`
+  : "";
+---
+
+<section
+  class={`section ${hasImage ? "hero-image" : bgClass}`}
+  style={bgStyle}
+>
+  {anglesTop && <AngleEdge position="top" direction={dirTop} fill="#FFFFFF" height={120} />}
+
+  <div class="mx-auto max-w-6xl px-6 py-28 md:py-36 text-center">
+    <header class="max-w-3xl mx-auto">
+      <h1 class={`text-4xl md:text-6xl font-extrabold tracking-tight mb-4 ${hasImage ? "text-white drop-shadow" : "text-text"}`}>
+        {title}
+      </h1>
+      {subtitle && (
+        <p class={`text-lg md:text-xl max-w-3xl mx-auto mb-8 ${hasImage ? "text-white/85" : "text-muted"}`}>
+          {subtitle}
+        </p>
+      )}
+    </header>
+
+    <div class="flex items-center justify-center gap-4">
+      {ctaText && (
+        <a
+          href={ctaHref}
+          class={`inline-block px-6 py-3 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-primary/50 ${
+            hasImage ? "bg-primary text-white hover:opacity-90" : "bg-primary text-white hover:opacity-90"
+          }`}
+        >
+          {ctaText}
+        </a>
+      )}
+      {secondaryText && (
+        <a
+          href={secondaryHref}
+          class={`inline-block px-6 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/30 ${
+            hasImage
+              ? "border border-white/60 bg-white/20 text-white hover:bg-white/30"
+              : "border border-line bg-white text-text hover:bg-slate-50"
+          }`}
+        >
+          {secondaryText}
+        </a>
+      )}
+    </div>
+  </div>
+
+  {anglesBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
+</section>

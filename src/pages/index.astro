@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SEOHead from "../components/SEOHead.astro";
+import HeaderFrame from "../components/header/HeaderFrame.astro";
+
+import HeroBannerSolid from "../components/sections/HeroBannerSolid.astro";
+import AboutSimple from "../components/sections/About.astro";
+import FeaturesGrid from "../components/sections/FeaturesGrid.astro";
+import ContactCTA from "../components/sections/Contact.astro";
+
+import features from "../content/features";
+import site from "../config/site";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout>
+  <SEOHead title={`${site.name} — Home`} description={site.tagline} />
+
+  <!-- <HeaderFrame variant="popup" /> -->
+  <HeaderFrame variant="bar" />
+  <!-- <Header /> -->
+
+<!-- ** Use the following two for desktop popup ** -->
+ <!-- Mobile header (shows hamburger only on < md) -->
+<!-- <div class="md:hidden">
+  <Header />
+</div> -->
+
+<!-- Desktop header (shows “Menu” button only on ≥ md) HeaderSolidPopup.astro -->
+<!-- <div class="hidden md:block">
+  <HeaderPopup />
+</div> -->
+
+  <main id="main">
+    <!-- Hero: full width; bottom edge slants LEFT into SURFACE -->
+    <HeroBannerSolid
+      bg="primary-tint"
+      bgImage="https://picsum.photos/1200/800"
+      overlayPercent={85}
+      title="This is STUDIO ZERO"
+      subtitle="A layout with brand-agnostic styling, optional angled sections, and swappable image shapes."
+      ctaText="Get Started"
+      ctaHref="#contact"
+      secondaryText="Learn more"
+      secondaryHref="#features"
+      anglesTop={false}
+      anglesBottom={true}
+      dirTop="left"
+      dirBottom="right"
+      nextBg="alt"
+    />
+
+    <AboutSimple
+      id="about"
+      title="About Studio Zero"
+      image="/assets/about.jpg"
+      bg="alt"
+      nextBg="surface"
+      angleTop={false}
+      angleBottom={true}
+      dirTop="right"
+      dirBottom="left"
+    />
+
+    <!-- What’s inside on ALT; let Spotlights handle the shared boundary -->
+    <FeaturesGrid
+      id="features"
+      title="What's inside"
+      items={features}
+      bg="surface"
+      nextBg="alt"
+      angleTop={false}       
+      angleBottom={true} 
+      dirTop="left"    
+      dirBottom="right"
+    />
+
+    <!-- Contact on SURFACE; both edges; next (footer) is SURFACE -->
+    <ContactCTA
+      id="contact"
+      title="Get in touch"
+      bg="alt"
+      nextBg="alt"
+      angleTop={false}
+      angleBottom={true}
+      dirTop="right"
+      dirBottom="right"
+    />
+    <Footer />
+  </main>
+</BaseLayout>

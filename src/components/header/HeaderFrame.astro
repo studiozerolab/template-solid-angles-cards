@@ -1,0 +1,24 @@
+---
+import MobileMenu from "./MobileMenu.astro";
+import DesktopHeaderBar from "./DesktopHeaderBar.astro";
+import DesktopHeaderPopup from "./DesktopHeaderPopup.astro";
+
+
+interface Props { variant?: "bar" | "popup" }
+const { variant = "popup" } = Astro.props as Props;
+---
+
+<!-- Mobile: shared drawer -->
+<div class="md:hidden">
+<MobileMenu />
+</div>
+
+
+<!-- Desktop: choose a variant -->
+<div class="hidden md:block">
+{variant === "bar" ? (
+<DesktopHeaderBar />
+) : (
+<DesktopHeaderPopup />
+)}
+</div>

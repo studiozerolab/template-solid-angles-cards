@@ -1,0 +1,38 @@
+---
+/**
+ * Inline SVG angle separator (Solid State style).
+ *
+ * Props:
+ *  - position: "top" | "bottom"
+ *  - direction: "left" | "right"    // which way the diagonal slopes
+ *  - fill: string                   // color (usually next section’s background)
+ *  - height?: number                // optional; default 120
+ */
+const { position = "bottom", direction = "left", fill = "#FFFFFF", height = 120 } = Astro.props;
+
+// Slight overdraw (-1 to 101) prevents Safari/Firefox hairlines.
+const left = -2;
+const right = 102;
+
+let points = "";
+
+// Bottom wedge -> sits after the section, filled with NEXT section color
+if (position === "bottom") {
+  points = direction === "left"
+    ? `${left},100 ${right},0 ${right},100`     // \ slants down-left to right
+    : `${left},0 ${left},100 ${right},100`;     // / slants down-right to left
+}
+
+// Top wedge -> sits before the section, filled with PREVIOUS section color
+if (position === "top") {
+  points = direction === "left"
+    ? `${left},0 ${right},0 ${left},100`        // \ slants up-left to right
+    : `${right},0 ${right},100 ${left},0`;      // / slants up-right to left
+}
+---
+
+<div class={`angle-edge angle-${position}`} style={`height:${height}px;line-height:0;`}>
+  <svg viewBox="0 0 100 100" preserveAspectRatio="none" width="100%" height="100%" aria-hidden="true" focusable="false" style="display:block">
+    <polygon points={points} fill={fill}></polygon>
+  </svg>
+</div>
