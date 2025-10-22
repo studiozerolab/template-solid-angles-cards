@@ -2,7 +2,7 @@ const site = {
   name: "Studio Zero",
   logoAlt: "Studio Zero",
   tagline: "Modern, modular templates for real-world small businesses.",
-  email: "hello@example.com",
+  email: "info@studiozerolab.com",
   phone: "(555) 555-1212",
   address: "123 Main St, Anytown, USA",
   socials: [
@@ -19,8 +19,8 @@ const site = {
     line: "#E2E8F0",
   },
   images: {
-    hero: "https://picsum.photos/1200/800",
-    // hero: "/assets/hero.jpg",
+    // hero: "https://picsum.photos/1200/800",
+    hero: "/assets/rocks-1920x1280.jpg",
     footer: "/assets/footer-texture.jpg",
   },
   defaults: {
