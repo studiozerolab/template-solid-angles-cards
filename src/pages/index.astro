@@ -36,8 +36,8 @@ import Footer from "../components/Footer.astro";
       bg="primary-tint"
       bgImage={site.images.hero}
       overlayPercent={85}
-      title="This is STUDIO ZERO"
-      subtitle="A layout with brand-agnostic styling, optional angled sections, and swappable image shapes."
+      title="Modern Design, Real Results"
+      subtitle="Clean, responsive websites that help small businesses look professional and grow online."
       ctaText="Get Started"
       ctaHref="#contact"
       secondaryText="Learn more"
@@ -51,7 +51,7 @@ import Footer from "../components/Footer.astro";
 
     <AboutSimple
       id="about"
-      title="About Studio Zero"
+      title="About Us"
       image="/assets/about.jpg"
       bg="alt"
       nextBg="surface"
@@ -63,10 +63,11 @@ import Footer from "../components/Footer.astro";
 
     <!-- What’s inside on ALT; let Spotlights handle the shared boundary -->
     <FeaturesGrid
-      id="features"
-      title="What's inside"
+      id="services"
+      title="What We Offer"
       items={features}
-      bg="surface"
+      bg="alt"
+      prevBg="surface"
       nextBg="alt"
       angleTop={false}       
       angleBottom={true} 
@@ -78,10 +79,10 @@ import Footer from "../components/Footer.astro";
     <ContactCTA
       id="contact"
       title="Get in touch"
-      bg="alt"
-      nextBg="alt"
+      bg="strong"
+      nextBg="strong"
       angleTop={false}
-      angleBottom={true}
+      angleBottom={false}
       dirTop="right"
       dirBottom="right"
     />

@@ -12,7 +12,9 @@ const {
   id,
   title,
   subtitle = "",
-  body = "Studio Zero creates simple, modern websites built for real people and small businesses. We focus on usability, speed, and clean design—so you can focus on what you do best.",
+  body = `We believe great design should be simple, approachable, and effective. Our goal is to help small businesses and independent professionals make a strong impression online - without unnecessary complexity or cost. 
+  
+  Every site is built with performance, accessibilty, and ease of use in mind, so you can focus on running your business while your website works for you.`,
   image,
   showImage = true,
   bg,          // surface | alt | primary-tint | accent-tint
@@ -53,7 +55,7 @@ const nextColor =
     <div class="text-center md:text-left space-y-4">
       <h2 class="text-3xl font-bold tracking-tight">{title}</h2>
       {subtitle && <p class="text-primary font-medium">{subtitle}</p>}
-      <p class="text-muted leading-relaxed">{body}</p>
+      <p class="text-muted leading-relaxed whitespace-pre-line">{body}</p>
     </div>
   </div>
 

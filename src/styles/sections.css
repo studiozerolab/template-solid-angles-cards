@@ -1,15 +1,29 @@
+:root {
+  --brand: #2563EB;
+  --accent: #F59E0B;
+}
+
 /* ===== Section backgrounds (tokens) ===== */
-.section-surface      { --section-bg: #ffffff; background: var(--section-bg); }
+.section-surface      { --section-bg: #FFFFFF; background: var(--section-bg); }
 .section-alt          { --section-bg: #F8FAFC; background: var(--section-bg); }
-.section-primary-tint { --section-bg: color-mix(in srgb, #2563EB 6%, #ffffff); background: var(--section-bg); }
-.section-accent-tint  { --section-bg: color-mix(in srgb, #F59E0B 6%, #ffffff); background: var(--section-bg); }
+.section--mid         { --section-bg: #F1F5F9; background: var(--section-bg);}
+.section--strong      { --section-bg: #E2E8F0; background: var(--section-bg);}
+/* .section-primary-tint { --section-bg: color-mix(in srgb, var(--brand) 12%, #ffffff 88%); 
+  background: var(--section-bg), #EFF5FF;}
+.section-accent-tint  { --section-bg: color-mix(in srgb, var(--accent) 10%, #ffffff 90%); 
+  background: var(--section-bg), #FFF7EA; } */
 
 /* Content shells (hero stays full width) */
 .content-narrow   { max-width: 60rem; margin-left: auto; margin-right: auto; }
 .content-narrower { max-width: 56rem; margin-left: auto; margin-right: auto; }
 
 /* Section wrapper (for layering) */
-.section { position: relative; isolation: isolate; overflow: hidden; }
+.section { 
+  position: relative; 
+  isolation: isolate; 
+  overflow: hidden; 
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.00), rgba(0,0,0,0.02)); 
+}
 .angle-edge { width: 100%; }
 
 /* ===== Hero background & overlay ===== */
@@ -49,12 +63,24 @@
 @media (min-width: 1024px) { .card-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 
 .card-vitae { border: 1px solid var(--line,#E2E8F0); border-radius: .75rem; background: #fff; overflow: hidden; box-shadow: 0 1px 8px rgba(0,0,0,.04); }
-.card-vitae img { display: block; width: 100%; height: 12rem; object-fit: cover; }
+/* .card-vitae img { display: block; width: 100%; height: 12rem; object-fit: cover; } */
 .card-vitae .body { padding: 1rem 1rem 1.1rem; }
 .card-vitae h3 { font-size: 1.1rem; font-weight: 600; margin: 0 0 .35rem; }
 .card-vitae p { color: #475569; margin: 0 0 .75rem; }
 .card-vitae .cta { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .85rem; border: 1px solid var(--line,#E2E8F0); border-radius: .5rem; }
 .card-vitae .cta::before { content: "○"; opacity: .75; font-size: .9rem; }
+
+.card-image  {
+  filter: brightness(0.9) contrast(1.05) saturate(0.95);
+}
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.05); /* subtle neutral wash */
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
 
 /* ===== Footer background (texture/image) ===== */
 .footer-image {

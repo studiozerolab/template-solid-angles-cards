@@ -5,29 +5,44 @@ const {
   id,
   title,
   items = [],
-  bg,       // surface | alt | primary-tint | accent-tint
-  nextBg,
-  angleTop,
-  angleBottom,
-  dirTop,   // left | right
-  dirBottom, // left | right
+  bg = "surface",       // surface | alt | primary-tint | accent-tint
+  prevBg = "surface",
+  nextBg = "surface",
+  angleTop = false,
+  angleBottom = true,
+  dirTop ="left",   // left | right
+  dirBottom = "right", // left | right
 } = Astro.props;
 
-const bgClass =
-  bg === "alt" ? "section-alt" :
-  bg === "primary-tint" ? "section-primary-tint" :
-  bg === "accent-tint" ? "section-accent-tint" :
-  "section-surface";
+// Central map: token -> class name (matches your CSS) and a SOLID hex for SVG fills
+const BG = {
+  surface:       { class: "section--surface",       fill: "#FFFFFF" },       
+  alt:           { class: "section--alt",           fill: "#F8FAFC" },
+  mid:           { class: "section--mid",           fill: "#F1F5F9" },
+  strong:        { class: "section--strong",        fill: "#E2E8F0" },
+  "primary-tint":{ class: "section--primary-tint",       fill: "#E7F0FF" },       
+  "accent-tint": { class: "section--accent-tint",        fill: "#FFF4E5" },       
+};
 
-const nextColor =
-  nextBg === "alt" ? "#F8FAFC" :
-  nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)" :
-  nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)" :
-  "#FFFFFF";
+const bgClass    = BG[bg]?.class       ?? BG.surface.class;
+const fillTop    = BG[prevBg]?.fill    ?? BG.surface.fill;   // top seam fills previous section color
+const fillBottom = BG[nextBg]?.fill    ?? BG.surface.fill;   // bottom seam fills next section color
+
+// const bgClass =
+//   bg === "alt" ? "section-alt" :
+//   bg === "primary-tint" ? "section-primary-tint" :
+//   bg === "accent-tint" ? "section-accent-tint" :
+//   "section-surface";
+
+// const nextColor =
+//   nextBg === "alt" ? "#F8FAFC" :
+//   nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)" :
+//   nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)" :
+//   "#FFFFFF";
 ---
 
 <section id={id} class={`section ${bgClass}`}>
-  {angleTop && <AngleEdge position="top" direction={dirTop} fill="#FFFFFF" height={120} />}
+  {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={120} />}
 
   <div class="card-shell px-6 py-16">
     <h2 class="text-2xl md:text-3xl font-bold mb-8">{title}</h2>
@@ -35,8 +50,8 @@ const nextColor =
       {items.map((it) => (
         <article class="card-vitae overflow-hidden rounded-lg border border-line bg-white shadow-sm flex flex-col h-full">
           {it.image && (
-            <div class="w-full aspect-[16/9] overflow-hidden">
-              <img src={it.image} alt="" loading="lazy" class="h-full w-full object-cover"/>
+            <div class="relative w-full aspect-[16/9] rounded-t-lg overflow-hidden card-image">
+              <img src={it.image} alt="" loading="lazy" class="absolute inset-0 block h-full w-full object-cover"/>
             </div>
           )}
             
@@ -50,5 +65,5 @@ const nextColor =
     </div>
   </div>
 
-  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
+  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={fillBottom} height={120} />}
 </section>

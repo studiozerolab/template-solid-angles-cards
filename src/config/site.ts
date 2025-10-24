@@ -1,10 +1,10 @@
 const site = {
   name: "Studio Zero",
   logoAlt: "Studio Zero",
-  tagline: "Modern, modular templates for real-world small businesses.",
+  tagline: "Modern, modular websites built for small businesses and independent professionals. Clean design, clear messaging, and lasting results.",
   email: "info@studiozerolab.com",
-  phone: "(555) 555-1212",
-  address: "123 Main St, Anytown, USA",
+  phone: "(631) 223-8108",
+  address: "Huntington, New York",
   socials: [
     { label: "Twitter", href: "https://twitter.com/", icon: "𝕏" },
     { label: "GitHub", href: "https://github.com/", icon: "{}" },
