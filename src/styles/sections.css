@@ -8,10 +8,10 @@
 .section-alt          { --section-bg: #F8FAFC; background: var(--section-bg); }
 .section--mid         { --section-bg: #F1F5F9; background: var(--section-bg);}
 .section--strong      { --section-bg: #E2E8F0; background: var(--section-bg);}
-/* .section-primary-tint { --section-bg: color-mix(in srgb, var(--brand) 12%, #ffffff 88%); 
+.section-primary-tint { --section-bg: color-mix(in srgb, var(--brand) 12%, #ffffff 88%); 
   background: var(--section-bg), #EFF5FF;}
 .section-accent-tint  { --section-bg: color-mix(in srgb, var(--accent) 10%, #ffffff 90%); 
-  background: var(--section-bg), #FFF7EA; } */
+  background: var(--section-bg), #FFF7EA; }
 
 /* Content shells (hero stays full width) */
 .content-narrow   { max-width: 60rem; margin-left: auto; margin-right: auto; }

@@ -14,7 +14,7 @@ const {
   dirBottom = "right", // left | right
 } = Astro.props;
 
-// Central map: token -> class name (matches your CSS) and a SOLID hex for SVG fills
+// Central map: token -> class name (matches CSS) and a SOLID hex for SVG fills
 const BG = {
   surface:       { class: "section--surface",       fill: "#FFFFFF" },       
   alt:           { class: "section--alt",           fill: "#F8FAFC" },
@@ -34,11 +34,11 @@ const fillBottom = BG[nextBg]?.fill    ?? BG.surface.fill;   // bottom seam fill
 //   bg === "accent-tint" ? "section-accent-tint" :
 //   "section-surface";
 
-// const nextColor =
-//   nextBg === "alt" ? "#F8FAFC" :
-//   nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)" :
-//   nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)" :
-//   "#FFFFFF";
+const nextColor =
+  nextBg === "alt" ? "#F8FAFC" :
+  nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)" :
+  nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)" :
+  "#FFFFFF";
 ---
 
 <section id={id} class={`section ${bgClass}`}>
@@ -65,5 +65,5 @@ const fillBottom = BG[nextBg]?.fill    ?? BG.surface.fill;   // bottom seam fill
     </div>
   </div>
 
-  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={fillBottom} height={120} />}
+  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
 </section>
