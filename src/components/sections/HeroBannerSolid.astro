@@ -21,8 +21,8 @@ const {
   ctaHref = "#",
   secondaryText,
   secondaryHref = "#",
-  anglesTop,
-  anglesBottom,
+  angleTop,
+  angleBottom,
   dirTop,
   dirBottom,
   nextBg,
@@ -41,19 +41,9 @@ const p = Math.max(0, Math.min(100, Number(overlayPercent) || 0)) / 100;
 const topA = p;                  // e.g., 0.45 when overlayPercent=45
 const bottomA = p * 0.66;        // a touch lighter at the end
 
-// Next-section fill
-const nextColor =
-  nextBg === "alt" ? "#F8FAFC"
-  : nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)"
-  : nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)"
-  : "#FFFFFF";
-
-// Solid background token class when no image
-const bgClass =
-  bg === "alt" ? "section-alt"
-  : bg === "primary-tint" ? "section-primary-tint"
-  : bg === "accent-tint" ? "section-accent-tint"
-  : "section-surface";
+const bgClass = `section-${bg}`;
+const fillTop = `var(--color-${bg})`;
+const nextColor = `var(--color-${nextBg})`;
 
 // Inline background-image that includes the overlay when we have an image
 const bgStyle = hasImage
@@ -65,7 +55,7 @@ const bgStyle = hasImage
   class={`section ${hasImage ? "hero-image" : bgClass}`}
   style={bgStyle}
 >
-  {anglesTop && <AngleEdge position="top" direction={dirTop} fill="#FFFFFF" height={120} />}
+  {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={120} />}
 
   <div class="mx-auto max-w-6xl px-6 py-28 md:py-36 text-center">
     <header class="max-w-3xl mx-auto">
@@ -105,5 +95,5 @@ const bgStyle = hasImage
     </div>
   </div>
 
-  {anglesBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
+  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
 </section>

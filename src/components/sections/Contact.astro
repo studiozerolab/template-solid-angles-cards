@@ -12,21 +12,13 @@ const {
   nextBg,       // surface | alt | primary-tint | accent-tint
 } = Astro.props;
 
-const bgClass =
-  bg === "alt" ? "section-alt"
-  : bg === "primary-tint" ? "section-primary-tint"
-  : bg === "accent-tint" ? "section-accent-tint"
-  : "section-surface";
-
-const nextColor =
-  nextBg === "alt" ? "#F8FAFC"
-  : nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)"
-  : nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)"
-  : "#FFFFFF";
+  const bgClass = `section-${bg}`;
+  const nextColor = `var(--color-${nextBg})`;
+  const fillTop = `var(--color-${bg})`;
 ---
 
 <section id={id} class={`section ${bgClass}`}>
-  {angleTop && <AngleEdge position="top" direction={dirTop} fill="#FFFFFF" height={110} />}
+  {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={110} />}
 
   <div class="mx-auto max-w-6xl px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 py-20 md:py-28">
     <div class="grid md:grid-cols-12 gap-x-12 gap-y-10 items-start">
