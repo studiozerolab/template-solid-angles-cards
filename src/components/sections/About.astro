@@ -41,7 +41,7 @@ const nextColor = `var(--color-${nextBg})`;
 ---
 
 <section id={id} class={`section ${bgClass}`}>
-  {angleTop && <AngleEdge position="top" direction={dirTop} fill={bgClass} height={120} />}
+  {angleTop && <AngleEdge position="top" direction={dirTop} fill={bgClass} height={100} />}
 
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
     {showImage && (
@@ -61,5 +61,5 @@ const nextColor = `var(--color-${nextBg})`;
     </div>
   </div>
 
-  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
+  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={100} />}
 </section>

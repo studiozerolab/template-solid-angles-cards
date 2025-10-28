@@ -55,7 +55,7 @@ const bgStyle = hasImage
   class={`section ${hasImage ? "hero-image" : bgClass}`}
   style={bgStyle}
 >
-  {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={120} />}
+  {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={100} />}
 
   <div class="mx-auto max-w-6xl px-6 py-28 md:py-36 text-center">
     <header class="max-w-3xl mx-auto">
@@ -95,5 +95,5 @@ const bgStyle = hasImage
     </div>
   </div>
 
-  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={120} />}
+  {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={100} />}
 </section>

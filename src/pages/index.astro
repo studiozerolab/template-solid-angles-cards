@@ -17,21 +17,9 @@ import Footer from "../components/Footer.astro";
 
   <!-- <HeaderFrame variant="popup" /> -->
   <HeaderFrame variant="bar" />
-  <!-- <Header /> -->
-
-<!-- ** Use the following two for desktop popup ** -->
- <!-- Mobile header (shows hamburger only on < md) -->
-<!-- <div class="md:hidden">
-  <Header />
-</div> -->
-
-<!-- Desktop header (shows “Menu” button only on ≥ md) HeaderSolidPopup.astro -->
-<!-- <div class="hidden md:block">
-  <HeaderPopup />
-</div> -->
 
   <main id="main">
-    <!-- Hero: full width; bottom edge slants LEFT into SURFACE -->
+    <!-- Hero: full width; bottom edge slants RIGHT -->
     <HeroBannerSolid
       bg="primary-tint"
       bgImage={site.images.hero}
@@ -42,8 +30,8 @@ import Footer from "../components/Footer.astro";
       ctaHref="#contact"
       secondaryText="Learn more"
       secondaryHref="#services"
-      anglesTop={false}
-      anglesBottom={true}
+      angleTop={false}
+      angleBottom={true}
       dirTop="left"
       dirBottom="right"
       nextBg="alt"
@@ -61,7 +49,6 @@ import Footer from "../components/Footer.astro";
       dirBottom="left"
     />
 
-    <!-- What’s inside on ALT; let Spotlights handle the shared boundary -->
     <FeaturesGrid
       id="services"
       title="What We Offer"
@@ -74,7 +61,6 @@ import Footer from "../components/Footer.astro";
       dirBottom="right"
     />
 
-    <!-- Contact on SURFACE; both edges; next (footer) is SURFACE -->
     <ContactCTA
       id="contact"
       title="Get in touch"

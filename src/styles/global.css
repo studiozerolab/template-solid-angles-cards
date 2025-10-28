@@ -13,9 +13,6 @@
   --color-primary:      #1E40AF;      /* SOLID brand indigo-800 */
   --color-secondary:    #F59E0B;      /* SOLID accent amber-500 */
   --color-accent:       #10B981;      /* SOLID accent emerald-500 */
-  /* Tailwind utility compatibility */
-  /* --color-primary: var(--color-primary-tint);
-  --color-accent: var(--color-accent-tint); */
 
   /* Fonts → gives you font-heading, font-body */
   --font-heading: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
