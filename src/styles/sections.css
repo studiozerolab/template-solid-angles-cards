@@ -1,7 +1,7 @@
-:root {
+/* :root {
   --brand: #2563EB;
   --accent: #F59E0B;
-}
+} */
 
 /* ===== Section backgrounds (tokens) surface → alt → mid → strong ===== */
 .section-surface       { background-color: var(--color-surface); }

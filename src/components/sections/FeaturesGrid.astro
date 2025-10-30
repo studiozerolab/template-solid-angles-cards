@@ -17,14 +17,27 @@ const {
 const bgClass = `section-${bg}`;
 const fillTop = `var(--color-${bg})`;
 const nextColor = `var(--color-${nextBg})`;
+
+const cards = Array.isArray(items) ? items : [];
+const needsSpacer = cards.length % 3 === 2;
 ---
 
 <section id={id} class={`section ${bgClass}`}>
   {angleTop && <AngleEdge position="top" direction={dirTop} height={100} />}
+<!-- 
+[&>*:last-child:nth-child(3n+1)]:lg:col-start-2  
+[&>*:last-child:nth-child(3n+2)]:lg:col-start-3"> 
+[&>*:nth-last-child(2):nth-child(3n+1)]:lg:col-start-2">
 
+md:[grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]
+lg:[grid-template-columns:repeat(auto-fit,minmax(320px,1fr))]
+
+<div class="card-grid grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch
+-->
   <div class="card-shell px-6 py-16">
     <h2 class="text-2xl md:text-3xl font-bold mb-8">{title}</h2>
-    <div class="card-grid grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+    <div class="card-grid grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch
+    [&>*:last-child:nth-child(3n+1)]:lg:col-start-2">
       {items.map((it) => (
         <article class="card-vitae overflow-hidden rounded-lg border border-line bg-white shadow-sm flex flex-col h-full">
           {it.image && (
@@ -36,10 +49,26 @@ const nextColor = `var(--color-${nextBg})`;
           <div class="body flex-1 p-5 flex flex-col">
             <h3>{it.title}</h3>
             {it.body && <p>{it.body}</p>}
-            <a href={it.href ?? "#"} class="cta mt-auto mx-auto inline-flex items-center justify-center gap-2 rounded-md border border-line px-5 py-2 text-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary/30 w-fit">Learn more</a>
+            {it.href && (
+              <a href={it.href ?? "#"} class="cta mt-auto mx-auto inline-flex items-center justify-center gap-2 rounded-md border border-line px-5 py-2 text-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary/30 w-fit">Learn more</a>
+            )}
           </div>
         </article>
       ))}
+    {needsSpacer && (
+      <div
+        aria-hidden="true"
+        class="hidden lg:flex items-center justify-center rounded-2xl border-2 border-dashed border-[var(--color-primary)]/40 text-[var(--color-primary)]/60 text-2xl font-medium"
+      >
+        <span>H&C</span> {/* nbsp; Ø */}
+      </div>
+
+      // Shaded empty card:
+      // <div
+      //   aria-hidden="true"
+      //   class="hidden lg:block rounded-2xl bg-[var(--color-alt)] opacity-40"
+      // />
+    )}
     </div>
   </div>
   {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={100} />}

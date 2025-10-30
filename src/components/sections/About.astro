@@ -2,19 +2,16 @@
 import AngleEdge from "../ui/AngleEdge.astro";
 
 /**
- * Simple About section
- * - Minimal but polished design
  * - Works with or without image
- * - Optional top/bottom angled dividers
  */
 
 const {
   id,
   title,
   subtitle = "",
-  body = `We believe great design should be simple, approachable, and effective. Our goal is to help small businesses and independent professionals make a strong impression online - without unnecessary complexity or cost. 
+  body = `At Harbor & Co., we believe every small business deserves a professional online presence. We create clean, modern websites that highlight what makes your work unique — without the high agency costs. 
   
-  Every site is built with performance, accessibilty, and ease of use in mind, so you can focus on running your business while your website works for you.`,
+  We focus on clarity, speed, and ease — so you can focus on running your business.`,
   image,
   showImage = true,
   bg,          // surface | alt | primary-tint | accent-tint
@@ -25,17 +22,6 @@ const {
   dirBottom,
 } = Astro.props;
 
-// const bgClass =
-//   bg === "alt" ? "section-alt"
-//   : bg === "primary-tint" ? "section-primary-tint"
-//   : bg === "accent-tint" ? "section-accent-tint"
-//   : "section-surface";
-
-// const nextColor =
-//   nextBg === "alt" ? "#F8FAFC"
-//   : nextBg === "primary-tint" ? "color-mix(in srgb, #2563EB 6%, #ffffff)"
-//   : nextBg === "accent-tint" ? "color-mix(in srgb, #F59E0B 6%, #ffffff)"
-//   : "#FFFFFF";
 const bgClass = `section-${bg}`;
 const nextColor = `var(--color-${nextBg})`;
 ---
@@ -50,11 +36,11 @@ const nextColor = `var(--color-${nextBg})`;
           src={image}
           alt=""
           loading="lazy"
-          class="w-full max-w-sm rounded-lg shadow-lg border border-line"
+          class="w-full max-w-sm rounded-lg shadow-lg border border-[var(--color-primary)] border-line"
         />
       </div>
     )}
-    <div class="text-center md:text-left space-y-4">
+    <div class="text-center md:text-left px-6 space-y-4">
       <h2 class="text-3xl font-bold tracking-tight">{title}</h2>
       {subtitle && <p class="text-primary font-medium">{subtitle}</p>}
       <p class="text-muted leading-relaxed whitespace-pre-line">{body}</p>
