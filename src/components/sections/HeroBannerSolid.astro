@@ -26,7 +26,6 @@ const {
   dirTop,
   dirBottom,
   nextBg,
-
   bgImage = undefined,
   bg,
   overlayPercent = "",
@@ -35,26 +34,43 @@ const {
 // Resolve image (explicit prop > site config). Empty string disables.
 const resolvedImage = bgImage !== undefined ? bgImage : site?.images?.hero;
 const hasImage = !!(resolvedImage && String(resolvedImage).trim().length);
+const base = hasImage
+  ? String(resolvedImage).replace(/\.(avif|webp|jpe?g|png)$/i, "")
+  : "";
 
 // Clamp & map overlay percentage (top a bit stronger than bottom for depth)
 const p = Math.max(0, Math.min(100, Number(overlayPercent) || 0)) / 100;
 const topA = p;                  // e.g., 0.45 when overlayPercent=45
 const bottomA = p * 0.66;        // a touch lighter at the end
-
 const bgClass = `section-${bg}`;
 const fillTop = `var(--color-${bg})`;
 const nextColor = `var(--color-${nextBg})`;
 
-// Inline background-image that includes the overlay when we have an image
-const bgStyle = hasImage
-  ? `background-image: linear-gradient(to bottom right, rgba(0,0,0,${topA}), rgba(0,0,0,${bottomA})), url('${resolvedImage}');`
+  // background-position: center 30%;
+  const bgStyle = hasImage
+  ? `background-image:
+       linear-gradient(to bottom right, rgba(0,0,0,${topA}), rgba(0,0,0,${bottomA})),
+       image-set(
+         url('${base}.avif') type('image/avif') 1x,
+         url('${base}.webp') type('image/webp') 1x,
+         url('${base}.jpg')  type('image/jpeg') 1x
+       );
+     background-size: cover;
+     background-repeat: no-repeat;`
   : "";
 ---
+
+{hasImage && (
+  <>
+    <link rel="preload" as="image" href={`${base}.avif`} type="image/avif" imagesizes="100vw" fetchpriority="high"/>
+  </>
+)}
 
 <section
   class={`section ${hasImage ? "hero-image" : bgClass}`}
   style={bgStyle}
 >
+
   {angleTop && <AngleEdge position="top" direction={dirTop} fill={fillTop} height={100} />}
 
   <div class="mx-auto max-w-6xl px-6 py-28 md:py-36 text-center">
@@ -96,4 +112,5 @@ const bgStyle = hasImage
   </div>
 
   {angleBottom && <AngleEdge position="bottom" direction={dirBottom} fill={nextColor} height={100} />}
+
 </section>

@@ -1,25 +1,28 @@
+import fastWatch from '../images/watch 800x600.jpg';
+import responsiveImg from '../images/responsive 800x.jpg';
+import colorsImg from '../images/colors.jpg';
+import cloudImg from '../images/cloud.jpg';
+import supportImg from '../images/supportx600.jpg';
+
 const features = [
     {
     title: "Fast Turnaround",
     body: "Launch your website in as little as five business days. Our streamlined process keeps things simple and stress-free.",
-    image: "/assets/watch 800x600.jpg",
-    // image: "https://picsum.photos/1000/625",
+    image: fastWatch,
     href: "",
   },
   {
     // title: "Mobile-Friendly Design",
     title: "Responsive Design",
     body: "Looks great on phones, tablets, and desktops - your website adapts automatically to every screen.",
-    image: "/assets/responsive 800x.jpg",
-    // image: "https://picsum.photos/1010/631",
+    image: responsiveImg,
     href: "",
   },
   {
     title: "Custom Branding",
     // body: "Your colors, logo, and tone applied throughout the site for a polished, professional look that feels like you.",
     body: "Personalized colors, fonts, and visuals that reflect your unique identity.",
-    image: "/assets/colors.jpg",
-    // image: "https://picsum.photos/1050/656",
+    image: colorsImg,
     href: "",
   },
   // {
@@ -33,14 +36,13 @@ const features = [
     title: "Hosting, Domain & Email Setup",
     body: "We can handle the technical details — domain connection, hosting, and professional email — so everything works from launch.",
     // body: "Guidance for choosing and connecting your domain, plus reliable hosting recommendations.",
-    image: "/assets/cloud.jpg",
-    // image: "https://picsum.photos/1020/637",
+    image: cloudImg,
     href: "",
   },
   {
     title: "Ongoing Support",
     body: "Need updates later? Optional care plans keep your site secure, current, and performing smoothly.",
-    image: "/assets/supportx600.jpg",
+    image: supportImg,
     href: "",
   },
   // {
